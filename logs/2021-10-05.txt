@@ -1,0 +1,12 @@
+[05-Oct-2021 13:16:15 Europe/Berlin] Uncaught exception: 'Exception' with message 'No route matched.'
+Stack trace: #0 C:\xampp\htdocs\feedback_system\public\index.php(17): Core\Router->dispatch('products')
+#1 {main}
+Thrown in 'C:\xampp\htdocs\feedback_system\Core\Router.php' on line 80
+[05-Oct-2021 13:16:15 Europe/Berlin] Uncaught exception: 'Exception' with message 'No route matched.'
+Stack trace: #0 C:\xampp\htdocs\feedback_system\public\index.php(17): Core\Router->dispatch('products')
+#1 {main}
+Thrown in 'C:\xampp\htdocs\feedback_system\Core\Router.php' on line 80
+[05-Oct-2021 13:16:16 Europe/Berlin] Uncaught exception: 'Exception' with message 'No route matched.'
+Stack trace: #0 C:\xampp\htdocs\feedback_system\public\index.php(17): Core\Router->dispatch('products')
+#1 {main}
+Thrown in 'C:\xampp\htdocs\feedback_system\Core\Router.php' on line 80
