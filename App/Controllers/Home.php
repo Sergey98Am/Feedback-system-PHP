@@ -4,19 +4,8 @@ namespace App\Controllers;
 
 //use \Core\View;
 
-/**
- * Home controller
- *
- * PHP version 5.4
- */
 class Home extends \Core\Controller
 {
-
-    /**
-     * Before filter
-     *
-     * @return false
-     */
     protected function before()
     {
         //echo "(before) ";
