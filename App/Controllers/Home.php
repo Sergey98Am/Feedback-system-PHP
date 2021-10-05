@@ -4,6 +4,8 @@ namespace App\Controllers;
 
 //use \Core\View;
 
+use Core\View;
+
 class Home extends \Core\Controller
 {
     protected function before()
@@ -29,6 +31,9 @@ class Home extends \Core\Controller
      */
     public function indexAction()
     {
-        echo 'Home';
+        View::renderTemplate('Home/index.html', [
+            'name'    => 'Dave',
+            'colours' => ['red', 'green', 'blue']
+        ]);
     }
 }
