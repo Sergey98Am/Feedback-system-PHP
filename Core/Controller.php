@@ -4,19 +4,11 @@ namespace Core;
 
 abstract class Controller
 {
-//    protected $route_params = [];
-//
-//    public function __construct($route_params)
-//    {
-//        $this->route_params = $route_params;
-//    }
-
     public function __call($name, $args)
     {
         $method = $name . 'Action';
 
         if (method_exists($this, $method)) {
-//            var_dump($name);
             if ($this->before() !== false) {
                 call_user_func_array([$this, $method], $args);
                 $this->after();
@@ -32,5 +24,11 @@ abstract class Controller
 
     protected function after()
     {
+    }
+
+    public function redirect($url)
+    {
+        header('Location: http://' . $_SERVER['HTTP_HOST'] . $url, true, 303);
+        exit;
     }
 }
