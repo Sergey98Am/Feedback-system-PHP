@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block title %}Sign up{% endblock %}
+
+{% block body %}
+
+<div class="col-12">
+    <h1>Sign up</h1>
+
+    {% if user.errors is not empty %}
+    <p>Errors</p>
+    <ul>
+        {% for error in user.errors %}
+            <li>{{ error }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+    <form method="post" action="/signup/create">
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" id="name" name="name" value="{{ user.name }}">
+        </div>
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" class="form-control" id="username" name="username" value="{{ user.username }}">
+        </div>
+        <div class="form-group">
+            <label for="email">Email address</label>
+            <input type="email" class="form-control" id="email" name="email" value="{{ user.email }}">
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" id="password" name="password" value="{{ user.password }}">
+        </div>
+        <div class="form-group">
+            <label for="confirm_password">Confirm Password</label>
+            <input type="password" class="form-control" id="confirm_password" name="confirm_password" value="{{ user.confirm_password }}">
+        </div>
+        <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="remember_me">
+            <label class="form-check-label" for="remember_me">Remember Me</label>
+        </div>
+        <button type="submit" class="btn btn-primary">Sign Up</button>
+    </form>
+</div>
+
+{% endblock %}
