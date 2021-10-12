@@ -43,4 +43,11 @@ abstract class Controller
             $this->redirect('/login/new');
         }
     }
+
+    public function requireToBeGuest()
+    {
+        if (Auth::getUser()) {
+            $this->redirect('/');
+        }
+    }
 }

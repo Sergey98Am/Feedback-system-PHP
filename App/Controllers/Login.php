@@ -10,11 +10,13 @@ class Login extends \Core\Controller
 {
     public function newAction()
     {
+        $this->requireToBeGuest();
         View::renderTemplate('Login/new.html');
     }
 
     public function createAction()
     {
+        $this->requireToBeGuest();
         $user = User::authenticate($_POST['username'], $_POST['password']);
 
         if ($user) {
@@ -27,6 +29,7 @@ class Login extends \Core\Controller
 
     public function destroyAction()
     {
+        $this->requireLogin();
         Auth::logout();
         $this->redirect('/');
     }
