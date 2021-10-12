@@ -7,8 +7,8 @@
     <div class="col-12">
         <h1>Welcome</h1>
 
-        {% if is_logged_in %}
-            <p>User is logged in</p>
+        {% if current_user %}
+            <p>Hello <b><i>{{ current_user.name }}</i></b></p>
         {% else %}
             <p>User is not logged in</p>
         {% endif %}

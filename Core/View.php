@@ -26,7 +26,7 @@ class View
         if ($twig === null) {
             $loader = new \Twig\Loader\FilesystemLoader('../App/Views');
             $twig = new \Twig\Environment($loader);
-            $twig->addGlobal('is_logged_in', Auth::isLoggedIn());
+            $twig->addGlobal('current_user', Auth::getUser());
             $twig->addFunction(new \Twig\TwigFunction('asset', function ($asset) {
                 // implement whatever logic you need to determine the asset path
 
