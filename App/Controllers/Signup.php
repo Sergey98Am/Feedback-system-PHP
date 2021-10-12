@@ -10,11 +10,13 @@ class Signup extends \Core\Controller
 {
     public function newAction()
     {
+        $this->requireToBeGuest();
         View::renderTemplate('Signup/new.html');
     }
 
     public function createAction()
     {
+        $this->requireToBeGuest();
         $user = new User($_POST);
 
         if ($user->save()) {
@@ -30,10 +32,5 @@ class Signup extends \Core\Controller
                 ]);
         }
 
-    }
-
-    public function successAction()
-    {
-        View::renderTemplate('Signup/success.html');
     }
 }
