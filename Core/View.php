@@ -24,6 +24,7 @@ class View
         if ($twig === null) {
             $loader = new \Twig\Loader\FilesystemLoader('../App/Views');
             $twig = new \Twig\Environment($loader);
+            $twig->addGlobal('session', $_SESSION);
             $twig->addFunction(new \Twig\TwigFunction('asset', function ($asset) {
                 // implement whatever logic you need to determine the asset path
 
