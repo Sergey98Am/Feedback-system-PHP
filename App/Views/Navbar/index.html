@@ -24,12 +24,18 @@
             <!--            </li>-->
         </ul>
         <ul class="nav navbar-nav navbar-right">
+            {% if session.user_id %}
+            <li class="nav-item">
+                <a class="nav-link" href="/login/destroy">Logout</a>
+            </li>
+            {% else %}
             <li class="nav-item">
                 <a class="nav-link" href="/login/new">Login</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/signup/new">Sign Up</a>
             </li>
+            {% endif %}
         </ul>
     </div>
 </nav>

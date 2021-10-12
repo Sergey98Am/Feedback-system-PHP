@@ -6,13 +6,12 @@
 
     <div class="col-12">
         <h1>Welcome</h1>
-        <p>Hello from a Twig template, {{ name }}!</p>
 
-        <ul>
-            {% for colour in colours %}
-            <li>{{ colour }}</li>
-            {% endfor %}
-        </ul>
+        {% if session.user_id %}
+            <p>User with ID {{ session.user_id }} is logged in</p>
+        {% else %}
+            <p>User is not logged in</p>
+        {% endif %}
     </div>
 
 {% endblock %}
