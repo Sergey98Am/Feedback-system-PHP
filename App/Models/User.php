@@ -123,4 +123,19 @@ class User extends \Core\Model
 
         return false;
     }
+
+    public static function findById($id)
+    {
+        $db = static::getDB();
+        $sql = 'SELECT * FROM feedback_system.users WHERE id = :id';
+
+        $stmt = $db->prepare($sql);
+        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+
+        $stmt->setFetchMode(PDO::FETCH_CLASS, get_called_class());
+
+        $stmt->execute();
+
+        return $stmt->fetch();
+    }
 }
