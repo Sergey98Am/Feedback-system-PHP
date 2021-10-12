@@ -7,7 +7,7 @@
     <div class="col-12">
         <h1>Welcome</h1>
 
-        {% if session.user_id %}
+        {% if is_logged_in %}
             <p>User with ID {{ session.user_id }} is logged in</p>
         {% else %}
             <p>User is not logged in</p>
