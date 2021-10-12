@@ -4,15 +4,22 @@ namespace App\Controllers;
 
 use App\Auth;
 use Core\View;
+use App\Controllers\Authenticated;
 
-class Items extends \Core\Controller
+class Items extends Authenticated
 {
     public function indexAction()
     {
-        if (!Auth::isLoggedIn()) {
-            $this->redirect('/login/new');
-        }
-
         View::renderTemplate('Items/index.html');
+    }
+
+    public function newAction()
+    {
+        echo 'new action';
+    }
+
+    public function showAction()
+    {
+        echo 'show action';
     }
 }
