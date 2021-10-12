@@ -116,7 +116,6 @@ class User extends \Core\Model
         $user = static::findByUsername($username);
 
         if ($user) {
-            var_dump($password, $user->password);
             if (password_verify($password, $user->password)) {
                 return $user;
             }

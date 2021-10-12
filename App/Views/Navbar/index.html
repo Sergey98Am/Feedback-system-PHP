@@ -24,7 +24,7 @@
             <!--            </li>-->
         </ul>
         <ul class="nav navbar-nav navbar-right">
-            {% if session.user_id %}
+            {% if is_logged_in %}
             <li class="nav-item">
                 <a class="nav-link" href="/login/destroy">Logout</a>
             </li>
