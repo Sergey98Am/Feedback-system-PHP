@@ -20,17 +20,12 @@ class Signup extends \Core\Controller
         $user = new User($_POST);
 
         if ($user->save()) {
-            $user = User::authenticate($_POST['username'], $_POST['password']);
-//            if ($user) {
-            Auth::login($user);
-            $this->redirect('/');
-//            }
+            $this->redirect('/login/new');
         } else {
             View::renderTemplate('Signup/new.html',
                 [
                     'user' => $user
                 ]);
         }
-
     }
 }
