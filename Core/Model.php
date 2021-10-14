@@ -25,7 +25,19 @@ abstract class Model
                     return true;
                 }
 
-                $table_sql = "CREATE TABLE IF NOT EXISTS feedback_system.users(id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, name VARCHAR(255) NOT NULL, username VARCHAR(255) NOT NULL UNIQUE,  email VARCHAR(255) NOT NULL UNIQUE, password VARCHAR(255) NOT NULL)";
+                $table_sql = "CREATE TABLE IF NOT EXISTS feedback_system.users(
+                                id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, 
+                                name VARCHAR(255) NOT NULL, 
+                                username VARCHAR(255) NOT NULL UNIQUE,  
+                                email VARCHAR(255) NOT NULL UNIQUE, 
+                                password VARCHAR(255) NOT NULL)";
+                $table_sql = "CREATE TABLE IF NOT EXISTS feedback_system.messages(
+                                id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, 
+                                first_name VARCHAR(255) NOT NULL, 
+                                last_name VARCHAR(255) NOT NULL,  
+                                email VARCHAR(255) NOT NULL, 
+                                message VARCHAR(600) NOT NULL
+                                )";
                 if ($db->query($table_sql) === FALSE) {
                     throw new Exception("Table not created");
 //                    return true;
