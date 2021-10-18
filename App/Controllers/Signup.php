@@ -22,10 +22,7 @@ class Signup extends \Core\Controller
         if ($user->save()) {
             $this->redirect('/login/new');
         } else {
-            View::renderTemplate('Signup/new.html',
-                [
-                    'user' => $user
-                ]);
+            $this->redirect('/signup/new');
         }
     }
 }
