@@ -3,11 +3,10 @@
 namespace App\Models;
 
 use PDO;
+use Core\Session;
 
 class User extends \Core\Model
 {
-    public $errors = [];
-
     public function __construct($data = [])
     {
         foreach ($data as $key => $value) {
@@ -15,11 +14,50 @@ class User extends \Core\Model
         }
     }
 
+    public function validate()
+    {
+        if ($this->name == '') {
+            Session::set('errors', 'name','Name is required');
+        }
+
+        if ($this->username == '') {
+            Session::set('errors', 'username','Username is required');
+        }
+
+        if ($this->usernameExists($this->username)) {
+            Session::set('errors', 'username', 'Username already taken');
+        }
+
+        if (filter_var($this->email, FILTER_VALIDATE_EMAIL) === false) {
+            Session::set('errors', 'email', 'Invalid email');
+        }
+
+        if ($this->emailExists($this->email)) {
+            Session::set('errors', 'email', 'Email already taken');
+        }
+
+        if (strlen($this->password) < 6) {
+            Session::set('errors', 'password','Please enter at least 6 characters for the password');
+        }
+
+        if (preg_match('/.*[a-z]+.*/i', $this->password) === 0) {
+            Session::set('errors', 'password','Password needs at least one letter');
+        }
+
+        if (preg_match('/.*\d+.*/i', $this->password) === 0) {
+            Session::set('errors', 'password','Password needs at least on number');
+        }
+
+        if ($this->password != $this->confirm_password) {
+            Session::set('errors', 'password', 'Password must match confirmation');
+        }
+    }
+
     public function save()
     {
         $this->validate();
 
-        if (empty($this->errors)) {
+        if (empty(Session::get('errors'))) {
             $db = static::getDB();
 
             $password_hash = password_hash($this->password, PASSWORD_DEFAULT);
@@ -37,45 +75,6 @@ class User extends \Core\Model
         }
 
         return false;
-    }
-
-    public function validate()
-    {
-        if ($this->name == '') {
-            $this->errors[] = 'Name is required';
-        }
-
-        if ($this->username == '') {
-            $this->errors[] = 'Username is required';
-        }
-
-        if ($this->usernameExists($this->username)) {
-            $this->errors[] = 'Username already taken';
-        }
-
-        if (filter_var($this->email, FILTER_VALIDATE_EMAIL) === false) {
-            $this->errors[] = 'Invalid email';
-        }
-
-        if ($this->emailExists($this->email)) {
-            $this->errors[] = 'Email already taken';
-        }
-
-        if (strlen($this->password) < 6) {
-            $this->errors[] = 'Please enter at least 6 characters for the password';
-        }
-
-        if (preg_match('/.*[a-z]+.*/i', $this->password) === 0) {
-            $this->errors[] = 'Password needs at least one letter';
-        }
-
-        if (preg_match('/.*\d+.*/i', $this->password) === 0) {
-            $this->errors[] = 'Password needs at least on number';
-        }
-
-        if ($this->password != $this->confirm_password) {
-            $this->errors[] = 'Password must match confirmation';
-        }
     }
 
     protected function usernameExists($username)

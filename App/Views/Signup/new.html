@@ -7,10 +7,10 @@
 <div class="col-12">
     <h1>Sign up</h1>
 
-    {% if user.errors is not empty %}
+    {% if errors is not empty %}
     <p>Errors</p>
     <ul>
-        {% for error in user.errors %}
+        {% for error in errors %}
             <li>{{ error }}</li>
         {% endfor %}
     </ul>

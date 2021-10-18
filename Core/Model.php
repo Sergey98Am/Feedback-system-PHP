@@ -4,6 +4,7 @@ namespace Core;
 
 use PDO;
 use App\Config;
+use Core\Session;
 
 abstract class Model
 {
