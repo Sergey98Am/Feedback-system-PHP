@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use PDO;
+use Core\Session;
 
 class Message extends \Core\Model
 {
@@ -19,7 +20,7 @@ class Message extends \Core\Model
     {
         $this->validate();
 
-        if (empty($this->errors)) {
+        if (empty(Session::get('errors'))) {
             $db = static::getDB();
 
             $sql = 'INSERT INTO feedback_system.messages (first_name, last_name, email, message) VALUES (:first_name, :last_name, :email, :message)';
@@ -40,19 +41,20 @@ class Message extends \Core\Model
     public function validate()
     {
         if ($this->first_name == '') {
-            $this->errors[] = 'First Name is required';
+            Session::set('errors', 'first_name','First Name is required');
         }
 
         if ($this->last_name == '') {
-            $this->errors[] = 'Last Name is required';
+            Session::set('errors', 'last_name','Last Name is required');
         }
 
         if (filter_var($this->email, FILTER_VALIDATE_EMAIL) === false) {
-            $this->errors[] = 'Invalid email';
+            Session::set('errors', 'email','Invalid email');
+
         }
 
         if ($this->message == '') {
-            $this->errors[] = 'Message is required';
+            Session::set('errors', 'message','Message is required');
         }
     }
 }
