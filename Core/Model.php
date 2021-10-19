@@ -35,6 +35,7 @@ abstract class Model
                                     name VARCHAR(255) NOT NULL)";
 
                 $roles_permissions = "CREATE TABLE IF NOT EXISTS feedback_system.roles_permissions(
+                                          id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT, 
                                           role_id INTEGER UNSIGNED NOT NULL,
                                           permission_id INTEGER UNSIGNED NOT NULL,
                                           FOREIGN KEY (role_id) REFERENCES feedback_system.roles(id) ON DELETE CASCADE,

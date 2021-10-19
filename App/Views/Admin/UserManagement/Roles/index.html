@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}Roles{% endblock %}
+
+{% block body %}
+
+<div class="col-12">
+    <h3><i>Roles</i></h3>
+    <a href="/admin/role/create" type="button" class="btn btn-light mb-2">Create Role</a>
+    <table class="table table-light">
+        <thead>
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Roles</th>
+            <th scope="col">Edit</th>
+            <th scope="col">Delete</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for role in roles %}
+        <tr>
+            <td>{{ role.name }}</td>
+            <td>
+            </td>
+            <td>
+                <a href="/admin/role/{{ role.id }}/edit" class="btn btn-primary">Edit</a>
+            </td>
+            <td>
+                <form method="post" action="/admin/role/{{ role.id }}/delete">
+                    <button class="btn btn-danger">Delete</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}
