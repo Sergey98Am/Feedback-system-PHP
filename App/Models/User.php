@@ -4,6 +4,7 @@ namespace App\Models;
 
 use PDO;
 use Core\Session;
+use Core\Model;
 
 class User extends \Core\Model
 {
@@ -12,6 +13,17 @@ class User extends \Core\Model
         foreach ($data as $key => $value) {
             $this->$key = $value;
         }
+    }
+
+    public static function usersTable()
+    {
+        Model::createTableIfNotExists('users', [
+            'id INT NOT NULL PRIMARY KEY AUTO_INCREMENT',
+            'name VARCHAR(255) NOT NULL',
+            'username VARCHAR(255) NOT NULL UNIQUE',
+            'email VARCHAR(255) NOT NULL UNIQUE',
+            'password VARCHAR(255) NOT NULL',
+        ]);
     }
 
     public function validate()
@@ -55,14 +67,21 @@ class User extends \Core\Model
 
     public function save()
     {
+        Model::createTableIfNotExists('users', [
+            'id INT NOT NULL PRIMARY KEY AUTO_INCREMENT',
+            'name VARCHAR(255) NOT NULL',
+            'username VARCHAR(255) NOT NULL UNIQUE',
+            'email VARCHAR(255) NOT NULL UNIQUE',
+            'password VARCHAR(255) NOT NULL',
+        ]);
         $this->validate();
 
         if (empty(Session::get('errors'))) {
-            $db = static::getDB();
+            $db = Model::getDB();
 
             $password_hash = password_hash($this->password, PASSWORD_DEFAULT);
 
-            $sql = 'INSERT INTO feedback_system.users (name, username, email, password) VALUES (:name, :username, :email, :password)';
+            $sql = "INSERT INTO users (name, username, email, password) VALUES (:name, :username, :email, :password)";
 
             $stmt = $db->prepare($sql);
 
@@ -84,9 +103,9 @@ class User extends \Core\Model
 
     public static function findByUsername($username)
     {
-        $db = static::getDB();
+        $db = Model::getDB();
 
-        $sql = 'SELECT * FROM feedback_system.users WHERE username = :username';
+        $sql = "SELECT * FROM users WHERE username = :username";
         $stmt = $db->prepare($sql);
         $stmt->bindValue(':username', $username, PDO::PARAM_STR);
 
@@ -99,9 +118,9 @@ class User extends \Core\Model
 
     protected function emailExists($email)
     {
-        $db = static::getDB();
+        $db = Model::getDB();
 
-        $sql = 'SELECT * FROM feedback_system.users WHERE email = :email';
+        $sql = "SELECT * FROM users WHERE email = :email";
         $stmt = $db->prepare($sql);
         $stmt->bindParam(':email', $email, PDO::PARAM_STR);
 
@@ -125,8 +144,8 @@ class User extends \Core\Model
 
     public static function findById($id)
     {
-        $db = static::getDB();
-        $sql = 'SELECT * FROM feedback_system.users WHERE id = :id';
+        $db = Model::getDB();
+        $sql = "SELECT * FROM users WHERE id = :id";
 
         $stmt = $db->prepare($sql);
         $stmt->bindValue(':id', $id, PDO::PARAM_INT);
