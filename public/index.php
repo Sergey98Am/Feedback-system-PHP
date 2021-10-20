@@ -1,12 +1,16 @@
 <?php
 
 use Core\Session;
+use Core\Model;
+use Core\Router;
 
 require '../vendor/autoload.php';
 
 error_reporting(E_ALL);
 set_error_handler('Core\Error::errorHandler');
 set_exception_handler('Core\Error::exceptionHandler');
+
+Model::createDBIfNotExists();
 
 session_start();
 //var_dump($_SESSION);
@@ -15,7 +19,7 @@ if (!Session::exists('errors')) {
 //    var_dump($_SESSION);
 }
 
-$router = new Core\Router();
+$router = new Router();
 
 // Add the routes
 $router->add('', ['controller' => 'Home', 'action' => 'index']);

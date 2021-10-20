@@ -14,15 +14,8 @@
                 <a class="nav-link" href="/feedback/create">Feedback</a>
             </li>
             {% if current_user %}
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    User Management
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="/admin/permission/index">Permissions</a>
-                    <a class="dropdown-item" href="/admin/role/index">Roles</a>
-                    <a class="dropdown-item" href="#">Users</a>
-                </div>
+            <li class="nav-item">
+                <a class="nav-link" href="/feedback/list">Feedback list</a>
             </li>
             {% endif %}
         </ul>

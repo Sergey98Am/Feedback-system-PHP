@@ -7,9 +7,9 @@
 <div class="col-12 col-md-8 offset-md-2">
     <div class="feedback">
         <h1><i>Feedback</i></h1>
-        {% if message.errors is not empty %}
+        {% if errors is not empty %}
         <ul>
-            {% for error in message.errors %}
+            {% for error in errors %}
             <li>{{ error }}</li>
             {% endfor %}
         </ul>

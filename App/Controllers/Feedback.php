@@ -9,6 +9,7 @@ class Feedback extends \Core\Controller
 {
     public function createAction()
     {
+        Message::messagesTable();
         View::renderTemplate('Feedback/index.html');
     }
 
@@ -19,15 +20,21 @@ class Feedback extends \Core\Controller
         if ($message->save()) {
             $this->redirect('/feedback/thank-you');
         } else {
-            View::renderTemplate('Feedback/index.html',
-                [
-                    'message' => $message
-                ]);
+            $this->redirect('/feedback/create');
         }
     }
 
     public function thankYouAction()
     {
         View::renderTemplate('Feedback/thank-you.html');
+    }
+
+    public function list()
+    {
+        $messages = new Message();
+        Message::messagesTable();
+        View::renderTemplate('Feedback/list.html', [
+            'messages' => $messages->all()
+        ]);
     }
 }

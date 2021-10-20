@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Core\Model;
 use PDO;
 use Core\Session;
 
@@ -13,6 +14,47 @@ class Message extends \Core\Model
     {
         foreach ($data as $key => $value) {
             $this->$key = $value;
+        }
+    }
+
+    public static function messagesTable()
+    {
+        self::createTableIfNotExists('messages', [
+            'id INT NOT NULL PRIMARY KEY AUTO_INCREMENT',
+            'first_name VARCHAR(255) NOT NULL',
+            'last_name VARCHAR(255) NOT NULL',
+            'email VARCHAR(255) NOT NULL',
+            'message VARCHAR(600) NOT NULL',
+        ]);
+    }
+
+    public function all()
+    {
+        $db = static::getDB();
+        $sql = 'SELECT * FROM messages';
+        $stmt = $db->prepare($sql);
+
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function validate()
+    {
+        if ($this->first_name == '') {
+            Session::set('errors', 'first_name','First Name is required');
+        }
+
+        if ($this->last_name == '') {
+            Session::set('errors', 'last_name','Last Name is required');
+        }
+
+        if (filter_var($this->email, FILTER_VALIDATE_EMAIL) === false) {
+            Session::set('errors', 'email','Invalid email');
+        }
+
+        if ($this->message == '') {
+            Session::set('errors', 'message','Message is required');
         }
     }
 
@@ -36,25 +78,5 @@ class Message extends \Core\Model
         }
 
         return false;
-    }
-
-    public function validate()
-    {
-        if ($this->first_name == '') {
-            Session::set('errors', 'first_name','First Name is required');
-        }
-
-        if ($this->last_name == '') {
-            Session::set('errors', 'last_name','Last Name is required');
-        }
-
-        if (filter_var($this->email, FILTER_VALIDATE_EMAIL) === false) {
-            Session::set('errors', 'email','Invalid email');
-
-        }
-
-        if ($this->message == '') {
-            Session::set('errors', 'message','Message is required');
-        }
     }
 }
