@@ -6,7 +6,7 @@ use PDO;
 use Core\Session;
 use Core\Model;
 
-class User extends \Core\Model
+class User extends Model
 {
     public function __construct($data = [])
     {

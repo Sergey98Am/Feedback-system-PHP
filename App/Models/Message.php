@@ -2,11 +2,11 @@
 
 namespace App\Models;
 
-use Core\Model;
 use PDO;
 use Core\Session;
+use Core\Model;
 
-class Message extends \Core\Model
+class Message extends Model
 {
     public $errors = [];
 
@@ -26,45 +26,6 @@ class Message extends \Core\Model
             'email VARCHAR(255) NOT NULL',
             'message VARCHAR(600) NOT NULL',
         ]);
-    }
-
-    public function all()
-    {
-        $db = static::getDB();
-        $sql = 'SELECT * FROM messages';
-        $stmt = $db->prepare($sql);
-
-        $stmt->execute();
-
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    }
-
-    public static function find($id)
-    {
-        $db = static::getDB();
-
-        $sql = "SELECT * FROM messages WHERE id = :id";
-
-        $stmt = $db->prepare($sql);
-
-        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
-
-        $stmt->execute();
-
-        return $stmt->fetch();
-    }
-
-    public function delete($id)
-    {
-        $db = static::getDB();
-
-        $sql = "DELETE FROM messages WHERE id = :id";
-
-        $stmt = $db->prepare($sql);
-
-        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
-
-        return $stmt->execute();
     }
 
     public function validate()
@@ -106,5 +67,44 @@ class Message extends \Core\Model
         }
 
         return false;
+    }
+
+    public function all()
+    {
+        $db = static::getDB();
+        $sql = 'SELECT * FROM messages';
+        $stmt = $db->prepare($sql);
+
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public static function find($id)
+    {
+        $db = static::getDB();
+
+        $sql = "SELECT * FROM messages WHERE id = :id";
+
+        $stmt = $db->prepare($sql);
+
+        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+
+        $stmt->execute();
+
+        return $stmt->fetch();
+    }
+
+    public function delete($id)
+    {
+        $db = static::getDB();
+
+        $sql = "DELETE FROM messages WHERE id = :id";
+
+        $stmt = $db->prepare($sql);
+
+        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+
+        return $stmt->execute();
     }
 }

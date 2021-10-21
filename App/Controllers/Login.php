@@ -6,8 +6,9 @@ use Core\Model;
 use Core\View;
 use App\Models\User;
 use App\Auth;
+use Core\Controller;
 
-class Login extends \Core\Controller
+class Login extends Controller
 {
     public function newAction()
     {
