@@ -15,6 +15,7 @@
             <li>git clone https://github.com/Sergey98Am/feedback_system.git</li>
             <li>composer install</li>
             <li>composer dump-autoload</li>
+            <li>Change App/Config.php constants values</li>
          </ul>
       </li>
    </ul>
