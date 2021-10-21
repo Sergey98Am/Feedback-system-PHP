@@ -23,7 +23,7 @@ class Login extends \Core\Controller
 
         if ($user) {
             Auth::login($user);
-            $this->redirect(Auth::getReturnToPage());
+            $this->redirect('/');
         } else {
             View::renderTemplate('Login/new.html');
         }

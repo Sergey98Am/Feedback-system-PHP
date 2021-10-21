@@ -32,16 +32,6 @@ class Auth
         session_destroy();
     }
 
-    public static function rememberRequestedPage()
-    {
-        $_SESSION['return_to'] = $_SERVER['REQUEST_URI'];
-    }
-
-    public static function getReturnToPage()
-    {
-        return $_SESSION['return_to'] ?? '/';
-    }
-
     public static function getUser()
     {
         if (isset($_SESSION['user_id'])) {
