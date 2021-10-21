@@ -39,6 +39,21 @@ class Message extends \Core\Model
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public static function find($id)
+    {
+        $db = static::getDB();
+
+        $sql = "SELECT * FROM messages WHERE id = :id";
+
+        $stmt = $db->prepare($sql);
+
+        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+
+        $stmt->execute();
+
+        return $stmt->fetch();
+    }
+
     public function validate()
     {
         if ($this->first_name == '') {
