@@ -54,6 +54,19 @@ class Message extends \Core\Model
         return $stmt->fetch();
     }
 
+    public function delete($id)
+    {
+        $db = static::getDB();
+
+        $sql = "DELETE FROM messages WHERE id = :id";
+
+        $stmt = $db->prepare($sql);
+
+        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+
+        return $stmt->execute();
+    }
+
     public function validate()
     {
         if ($this->first_name == '') {

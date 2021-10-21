@@ -60,4 +60,24 @@ class Feedback extends \Core\Controller
                 'message' => $message
             ]);
     }
+
+    public function delete()
+    {
+        $id = $this->route_params['id'];
+        $id = intval($id);
+
+        if ($id === null) {
+            echo 'Error 404';
+        }
+
+        $message = new Message($_POST);
+        $message = $message->delete($id);
+
+
+        if ($message) {
+            $this->redirect('/admin/permission/index');
+        } else {
+            echo 'Error 400';
+        }
+    }
 }
