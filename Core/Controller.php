@@ -43,11 +43,6 @@ abstract class Controller
         echo 'error';
     }
 
-//    public function withErrors()
-//    {
-//
-//    }
-
     public function requireLogin()
     {
         if (!Auth::getUser()) {
