@@ -4,8 +4,9 @@ namespace App\Controllers;
 
 use App\Models\Message;
 use Core\View;
+use Core\Controller;
 
-class Feedback extends \Core\Controller
+class Feedback extends Controller
 {
     public function createAction()
     {

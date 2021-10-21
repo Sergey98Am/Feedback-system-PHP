@@ -2,12 +2,11 @@
 
 namespace App\Controllers;
 
-use App\Auth;
-use Core\Model;
-use \Core\View;
+use Core\View;
 use App\Models\User;
+use Core\Controller;
 
-class Signup extends \Core\Controller
+class Signup extends Controller
 {
     public function newAction()
     {
