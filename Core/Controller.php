@@ -46,9 +46,6 @@ abstract class Controller
     public function requireLogin()
     {
         if (!Auth::getUser()) {
-
-            Auth::rememberRequestedPage();
-
             $this->redirect('/login/new');
         }
     }
