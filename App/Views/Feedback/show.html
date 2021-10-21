@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}Feedback list{% endblock %}
+
+{% block body %}
+
+<div class="col-12 col-lg-8 offset-lg-2 show-list">
+    <h3><i>Show message</i></h3>
+    <div class="card">
+        <h5 class="card-header">{{ message.first_name }} {{ message.last_name }}
+        <span><i>({{ message.email }})</i></span>
+        </h5>
+        <div class="card-body">
+            <p class="card-text">{{ message.message }}</p>
+            <a href="#" class="btn btn-danger">Delete</a>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

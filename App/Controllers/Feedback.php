@@ -31,10 +31,33 @@ class Feedback extends \Core\Controller
 
     public function list()
     {
-        $messages = new Message();
+        $this->requireLogin();
         Message::messagesTable();
+        $messages = new Message();
         View::renderTemplate('Feedback/list.html', [
             'messages' => $messages->all()
         ]);
+    }
+
+    public function show()
+    {
+        $this->requireLogin();
+        $id = $this->route_params['id'];
+        $id = intval($id);
+
+        if ($id === null) {
+            echo 'Error 404';
+        }
+
+        $message = Message::find($id);
+
+        if (!$message) {
+            echo 'Error 400';
+        }
+
+        View::renderTemplate('Feedback/show.html',
+            [
+                'message' => $message
+            ]);
     }
 }
