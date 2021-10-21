@@ -63,6 +63,7 @@ class Feedback extends \Core\Controller
 
     public function delete()
     {
+        $this->requireLogin();
         $id = $this->route_params['id'];
         $id = intval($id);
 
@@ -75,7 +76,7 @@ class Feedback extends \Core\Controller
 
 
         if ($message) {
-            $this->redirect('/admin/permission/index');
+            $this->redirect('/feedback/list');
         } else {
             echo 'Error 400';
         }
