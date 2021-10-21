@@ -2,7 +2,7 @@
    <h1>Feedback System</h1>
    <ul>
       <li>
-         <b>Requirments</b>
+         <b>Requirements</b>
          <ul>
             <li>PHP (starting from the 7th version)</li>
             <li>Apache</li>
