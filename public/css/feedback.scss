@@ -1,0 +1,22 @@
+.feedback {
+  background: white;
+  padding: 15px;
+  border-radius: 15px;
+
+  h1 {
+    margin-bottom: 20px;
+    text-align: center;
+    color: #80D0C7;
+    text-decoration: underline;
+  }
+
+  label {
+    color: #0093E9;
+  }
+
+  input, textarea {
+    background: none;
+    border: none;
+    border-bottom: 3px solid #0093E9;
+  }
+}

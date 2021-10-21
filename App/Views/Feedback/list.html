@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}Feedback list{% endblock %}
+
+{% block body %}
+
+<div class="col-12 list">
+    <h3><i>Feedback list</i></h3>
+    <table class="table table-light">
+        <thead>
+        <tr>
+            <th scope="col">Full Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Message</th>
+            <th scope="col">View</th>
+            <th scope="col">Delete</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for message in messages %}
+        <tr>
+            <td>{{ message.first_name }} {{ message.last_name }}</td>
+            <td>{{ message.email }}</td>
+            <td>
+                <p class="m-0 line-clamp">{{ message.message }}</p>
+            </td>
+            <td>
+                <a href="/feedback/{{ message.id }}/show" class="btn btn-info">View</a>
+            </td>
+            <td>
+                <form method="post" action="/feedback//{{ message.id }}/delete">
+                    <button class="btn btn-danger">Delete</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

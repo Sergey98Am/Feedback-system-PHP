@@ -1,0 +1,21 @@
+.feedback {
+  background: white;
+  padding: 15px;
+  border-radius: 15px;
+}
+.feedback h1 {
+  margin-bottom: 20px;
+  text-align: center;
+  color: #80D0C7;
+  text-decoration: underline;
+}
+.feedback label {
+  color: #0093E9;
+}
+.feedback input, .feedback textarea {
+  background: none;
+  border: none;
+  border-bottom: 3px solid #0093E9;
+}
+
+/*# sourceMappingURL=feedback.css.map */

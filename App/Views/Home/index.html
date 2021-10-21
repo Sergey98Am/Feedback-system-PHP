@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block body %}
+
+    <div class="col-12">
+        <h1>Welcome</h1>
+
+        {% if current_user %}
+            <p>Hello <b><i>{{ current_user.name }}</i></b></p>
+        {% else %}
+            <p>User is not logged in</p>
+        {% endif %}
+    </div>
+
+{% endblock %}
