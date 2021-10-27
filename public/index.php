@@ -13,10 +13,13 @@ set_exception_handler('Core\Error::exceptionHandler');
 Model::createDBIfNotExists();
 
 session_start();
-//var_dump($_SESSION);
+
 if (!Session::exists('errors')) {
     $errors = Session::setSession('errors', []);
-//    var_dump($_SESSION);
+}
+
+if (!Session::exists('postData')) {
+    $errors = Session::setSession('postData', []);
 }
 
 $router = new Router();

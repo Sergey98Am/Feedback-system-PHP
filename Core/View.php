@@ -33,6 +33,11 @@ class View
                 $twig->addGlobal('errors', $errors);
                 Session::delete('errors');
             }
+            if (Session::exists('postData')) {
+                $postData = Session::get('postData');
+                $twig->addGlobal('postData', $postData);
+                Session::delete('postData');
+            }
             $twig->addFunction(new \Twig\TwigFunction('asset', function ($asset) {
                 // implement whatever logic you need to determine the asset path
                 return sprintf('../assets/%s', ltrim($asset, '/'));

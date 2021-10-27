@@ -5,9 +5,13 @@ namespace Core;
 use PDO;
 use App\Config;
 
-abstract class Model
+class Model
 {
     protected static $db_name = Config::DB_NAME;
+
+    protected $table;
+
+    protected $stmt;
 
     public static function getDB()
     {
@@ -41,5 +45,34 @@ abstract class Model
         $columns = implode(",", $columns);
         $table = "CREATE TABLE IF NOT EXISTS $table_name($columns)";
         $db->exec($table);
+    }
+
+    public function table($table)
+    {
+        $this->table = $table;
+        return $this;
+    }
+
+    public function exists($data)
+    {
+        $field = array_keys($data)[0];
+        return $this->where($field, '=', $data[$field])->count() ? true : false;
+    }
+
+    public function where($field, $operator, $value)
+    {
+        $db = self::getDB();
+        $sql = "SELECT * FROM $this->table WHERE $field $operator ?";
+
+        $this->stmt = $db->prepare($sql);
+
+        $this->stmt->execute([$value]);
+
+        return $this;
+    }
+
+    public function count()
+    {
+        return $this->stmt->rowCount();
     }
 }
