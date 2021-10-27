@@ -5,6 +5,8 @@ namespace App\Models;
 use PDO;
 use Core\Session;
 use Core\Model;
+use Core\ErrorHandler;
+use Core\Validator;
 
 class User extends Model
 {
@@ -28,41 +30,29 @@ class User extends Model
 
     public function validate()
     {
-        if ($this->name == '') {
-            Session::set('errors', 'name','Name is required');
-        }
-
-        if ($this->username == '') {
-            Session::set('errors', 'username','Username is required');
-        }
-
-        if ($this->usernameExists($this->username)) {
-            Session::set('errors', 'username', 'Username already taken');
-        }
-
-        if (filter_var($this->email, FILTER_VALIDATE_EMAIL) === false) {
-            Session::set('errors', 'email', 'Invalid email');
-        }
-
-        if ($this->emailExists($this->email)) {
-            Session::set('errors', 'email', 'Email already taken');
-        }
-
-        if (strlen($this->password) < 6) {
-            Session::set('errors', 'password','Please enter at least 6 characters for the password');
-        }
-
-        if (preg_match('/.*[a-z]+.*/i', $this->password) === 0) {
-            Session::set('errors', 'password','Password needs at least one letter');
-        }
-
-        if (preg_match('/.*\d+.*/i', $this->password) === 0) {
-            Session::set('errors', 'password','Password needs at least on number');
-        }
-
-        if ($this->password != $this->confirm_password) {
-            Session::set('errors', 'password', 'Password must match confirmation');
-        }
+        $errorHandler = new ErrorHandler;
+        $validator = new Validator($errorHandler);
+        $validator->check($_POST, [
+            'name' => [
+                'required' => true,
+            ],
+            'username' => [
+                'required' => true,
+                'unique' => 'users',
+            ],
+            'email' => [
+                'required' => true,
+                'email' => true,
+                'unique' => 'users',
+            ],
+            'password' => [
+                'required' => true,
+                'minLength' => 8
+            ],
+            'confirm_password' => [
+                'match' => 'password'
+            ]
+        ]);
     }
 
     public function save()

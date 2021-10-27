@@ -7,29 +7,34 @@
 <div class="col-12 col-md-8 offset-md-2">
     <div class="feedback">
         <h1><i>Feedback</i></h1>
-        {% if errors is not empty %}
-        <ul>
-            {% for error in errors %}
-            <li>{{ error }}</li>
-            {% endfor %}
-        </ul>
-        {% endif %}
         <form method="post" action="/feedback/store">
             <div class="form-group">
                 <label for="first_name">First Name</label>
-                <input type="text" class="form-control" id="first_name" name="first_name" value="{{ message.first_name }}">
+                <input type="text" class="form-control {{ errors and errors['first_name'] ? 'is-invalid' : '' }}" id="first_name" name="first_name" value="{{ postData.first_name }}">
+                <div class="invalid-feedback">
+                    <span>{{ errors and errors['first_name'] ? errors['first_name'] : ''}}</span>
+                </div>
             </div>
             <div class="form-group">
                 <label for="last_name">Last Name</label>
-                <input type="text" class="form-control" id="last_name" name="last_name" value="{{ message.last_name }}">
+                <input type="text" class="form-control {{ errors and errors['last_name'] ? 'is-invalid' : '' }}" id="last_name" name="last_name" value="{{ postData.last_name }}">
+                <div class="invalid-feedback">
+                    <span>{{ errors and errors['last_name'] ? errors['last_name'] : ''}}</span>
+                </div>
             </div>
             <div class="form-group">
                 <label for="email">Email address</label>
-                <input type="email" class="form-control" id="email" name="email" value="{{ message.last_name }}">
+                <input type="email" class="form-control {{ errors and errors['email'] ? 'is-invalid' : '' }}" id="email" name="email" value="{{ postData.email }}">
+                <div class="invalid-feedback">
+                    <span>{{ errors and errors['email'] ? errors['email'] : ''}}</span>
+                </div>
             </div>
             <div class="form-group">
                 <label for="message">Message</label>
-                <textarea class="form-control" id="message" name="message" rows="3" value="{{ message.message }}"></textarea>
+                <textarea class="form-control {{ errors and errors['message'] ? 'is-invalid' : '' }}" id="message" name="message" rows="3">{{ postData.message }}</textarea>
+                <div class="invalid-feedback">
+                    <span>{{ errors and errors['message'] ? errors['message'] : ''}}</span>
+                </div>
             </div>
             <button type="submit" class="btn btn-primary">Send</button>
         </form>

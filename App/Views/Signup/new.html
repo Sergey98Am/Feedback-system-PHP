@@ -7,35 +7,41 @@
 <div class="col-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
     <h1>Sign up</h1>
 
-    {% if errors is not empty %}
-    <p>Errors</p>
-    <ul>
-        {% for error in errors %}
-            <li>{{ error }}</li>
-        {% endfor %}
-    </ul>
-    {% endif %}
-
     <form method="post" action="/signup/create">
         <div class="form-group">
             <label for="name">Name</label>
-            <input type="text" class="form-control" id="name" name="name" value="{{ user.name }}">
+            <input type="text" class="form-control {{ errors and errors['name'] ? 'is-invalid' : '' }}" id="name" name="name" value="{{ postData.name }}">
+            <div class="invalid-feedback">
+                <span>{{ errors and errors['name'] ? errors['name'] : ''}}</span>
+            </div>
         </div>
         <div class="form-group">
             <label for="username">Username</label>
-            <input type="text" class="form-control" id="username" name="username" value="{{ user.username }}">
+            <input type="text" class="form-control {{ errors and errors['username'] ? 'is-invalid' : '' }}" id="username" name="username" value="{{ postData.username }}">
+            <div class="invalid-feedback">
+                <span>{{ errors and errors['username'] ? errors['username'] : ''}}</span>
+            </div>
         </div>
         <div class="form-group">
             <label for="email">Email address</label>
-            <input type="email" class="form-control" id="email" name="email" value="{{ user.email }}">
+            <input type="text" class="form-control {{ errors and errors['email'] ? 'is-invalid' : '' }}" id="email" name="email" value="{{ postData.email }}">
+            <div class="invalid-feedback">
+                <span>{{ errors and errors['email'] ? errors['email'] : ''}}</span>
+            </div>
         </div>
         <div class="form-group">
             <label for="password">Password</label>
-            <input type="password" class="form-control" id="password" name="password">
+            <input type="password" class="form-control {{ errors and errors['password'] ? 'is-invalid' : '' }}" id="password" name="password">
+            <div class="invalid-feedback">
+                <span>{{ errors and errors['password'] ? errors['password'] : ''}}</span>
+            </div>
         </div>
         <div class="form-group">
             <label for="confirm_password">Confirm Password</label>
-            <input type="password" class="form-control" id="confirm_password" name="confirm_password">
+            <input type="password" class="form-control {{ errors and errors['confirm_password'] ? 'is-invalid' : '' }}" id="confirm_password" name="confirm_password">
+            <div class="invalid-feedback">
+                <span>{{ errors and errors['confirm_password'] ? errors['confirm_password']}}</span>
+            </div>
         </div>
         <button type="submit" class="btn btn-primary">Sign Up</button>
     </form>
