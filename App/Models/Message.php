@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use Core\ErrorHandler;
+use Core\Validator;
 use PDO;
 use Core\Session;
 use Core\Model;
@@ -30,21 +32,24 @@ class Message extends Model
 
     public function validate()
     {
-        if ($this->first_name == '') {
-            Session::set('errors', 'first_name','First Name is required');
-        }
-
-        if ($this->last_name == '') {
-            Session::set('errors', 'last_name','Last Name is required');
-        }
-
-        if (filter_var($this->email, FILTER_VALIDATE_EMAIL) === false) {
-            Session::set('errors', 'email','Invalid email');
-        }
-
-        if ($this->message == '') {
-            Session::set('errors', 'message','Message is required');
-        }
+        $errorHandler = new ErrorHandler;
+        $validator = new Validator($errorHandler);
+        $validator->check($_POST, [
+            'first_name' => [
+                'required' => true,
+            ],
+            'last_name' => [
+                'required' => true,
+            ],
+            'email' => [
+                'required' => true,
+                'email' => true,
+            ],
+            'message' => [
+                'required' => true,
+                'maxLength' => 600
+            ],
+        ]);
     }
 
     public function save()
